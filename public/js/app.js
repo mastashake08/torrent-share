@@ -43637,7 +43637,7 @@ var render = function() {
                         {
                           attrs: {
                             download: file.url,
-                            href: file.url,
+                            href: file.name,
                             target: "_blank"
                           }
                         },

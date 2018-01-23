@@ -16,7 +16,7 @@
                           Percentage Downloaded - {{progress}}%
                           <ul>
                             <li v-for="file in files">
-                              {{file.name}} - <a :download="file.url" :href="file.url" target="_blank">Download Now</a>
+                              {{file.name}} - <a :download="file.url" :href="file.name" target="_blank">Download Now</a>
                             </li>
                           </ul>
                           <br>
