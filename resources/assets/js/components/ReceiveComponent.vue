@@ -14,6 +14,11 @@
                         </div>
                         <div id="file-list" class="form-group">
                           Percentage Downloaded - {{progress}}%
+                          <ul>
+                            <li v-for="file in files">
+                              {{file.name}} - <a :download="file.url">Download Now</a>
+                            </li>
+                          </ul>
                           <br>
                         </div>
                     </div>
@@ -32,7 +37,8 @@
           return {
           client : {},
           magnet: "",
-          progress: ""
+          progress: "",
+          files: []
         }
         },
         created(){
@@ -50,16 +56,13 @@
             var files = torrent.files;
             for(var i = 0; i < files.length; i++){
 
+                var file = files[i];
               // Display the file by adding it to the DOM.
               // Supports video, audio, image files, and more!
               files[i].getBlobURL(function (err, url) {
+                console.log(file);
                 if (err) throw err
-                var a = document.createElement('a')
-                a.download = 'File ' + i;
-                a.href = url
-                a.textContent = 'Download ' + 'File ' + i
-                document.getElementById('file-list').appendChild(a)
-
+               that.files.push({url: url, name: file.name});
               });
             }
           });

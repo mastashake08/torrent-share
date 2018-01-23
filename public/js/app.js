@@ -43517,6 +43517,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
@@ -43526,7 +43531,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       client: {},
       magnet: "",
-      progress: ""
+      progress: "",
+      files: []
     };
   },
   created: function created() {
@@ -43545,15 +43551,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var files = torrent.files;
         for (var i = 0; i < files.length; i++) {
 
+          var file = files[i];
           // Display the file by adding it to the DOM.
           // Supports video, audio, image files, and more!
           files[i].getBlobURL(function (err, url) {
+            console.log(file);
             if (err) throw err;
-            var a = document.createElement('a');
-            a.download = 'File ' + i;
-            a.href = url;
-            a.textContent = 'Download ' + 'File ' + i;
-            document.getElementById('file-list').appendChild(a);
+            that.files.push({ url: url, name: file.name });
           });
         }
       });
@@ -43619,6 +43623,22 @@ var render = function() {
                     _vm._s(_vm.progress) +
                     "%\n                      "
                 ),
+                _c(
+                  "ul",
+                  _vm._l(_vm.files, function(file) {
+                    return _c("li", [
+                      _vm._v(
+                        "\n                          " +
+                          _vm._s(file.name) +
+                          " - "
+                      ),
+                      _c("a", { attrs: { download: file.url } }, [
+                        _vm._v("Download Now")
+                      ])
+                    ])
+                  })
+                ),
+                _vm._v(" "),
                 _c("br")
               ]
             )
