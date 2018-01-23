@@ -43632,9 +43632,17 @@ var render = function() {
                           _vm._s(file.name) +
                           " - "
                       ),
-                      _c("a", { attrs: { download: file.url } }, [
-                        _vm._v("Download Now")
-                      ])
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            download: file.url,
+                            href: file.url,
+                            target: "_blank"
+                          }
+                        },
+                        [_vm._v("Download Now")]
+                      )
                     ])
                   })
                 ),
