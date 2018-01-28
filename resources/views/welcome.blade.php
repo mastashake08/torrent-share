@@ -9,6 +9,9 @@
      data-ad-slot="2340456025"
      data-ad-format="auto"></ins>
 <script>
+
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <send-component></send-component>
 <receive-component></receive-component>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
