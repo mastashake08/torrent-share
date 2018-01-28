@@ -14,6 +14,7 @@
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 </div>
+<br>
 <send-component></send-component>
 <receive-component></receive-component>
 <div class="container">
