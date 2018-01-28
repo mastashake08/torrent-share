@@ -10,6 +10,9 @@ require('./bootstrap');
 window.Vue = require('vue');
 window.WebTorrent = require('webtorrent/webtorrent.min')
 window.dragDrop = require('drag-drop')
+import VueClipboard from 'vue-clipboard2'
+
+Vue.use(VueClipboard)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

@@ -11,7 +11,11 @@
                           <input type="file" v-on:change="send">
                         </div>
                         <div  v-if="isReady">
-                          SHARE - <strong>{{magnet}}</strong>
+                          <button v-if="copied == false" class="btn btn-sm btn-primary" type="button"
+                            v-clipboard:copy="magnet"
+                            v-clipboard:success="onCopy"
+                            v-clipboard:error="onError">Copy To Clipboard</button>
+                            <button v-else class="btn btn-sm" type="button" disabled>Copy To Clipboard</button>
                         </div>
                     </div>
                 </div>
@@ -23,13 +27,13 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
         },
         data() {
           return {
           client : {},
           magnet: "",
-          isReady: false
+          isReady: false,
+          copied: false,
         }
         },
         created(){
@@ -49,7 +53,13 @@
               that.magnet = torrent.magnetURI;
               that.isReady = true;
             })
+          },
+          onCopy: function (e) {
+            alert('Magnet Link Copied To Clipboard');
+          },
+          onError: function (e) {
+            alert('Failed to copy texts')
           }
-        }
     }
+  }
 </script>

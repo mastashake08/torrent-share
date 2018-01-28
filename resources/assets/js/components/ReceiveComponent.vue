@@ -14,12 +14,18 @@
                         </div>
                         <div id="file-list" class="form-group">
                           Percentage Downloaded - {{progress}}%
+
                           <ul>
                             <li v-for="file in files">
-                              {{file.name}} - <a :download="file.url" :href="file.name" target="_blank">Download Now</a>
+                              {{file.name}} - <a :download="file.name" :href="file.url" target="_blank">Download Now</a>
                             </li>
                           </ul>
                           <br>
+                          <div align="center" class="embed-responsive embed-responsive-16by9">
+                          <video v-show="isVideo"id="video-player" autoplay controls class="embed-responsive-item"></video>
+                          </div>
+                          <audio v-show="isAudio"id="audio-player" autoplay controls></audio>
+                          <img class="img-responsive" v-show="isImage" id="image-player"></img>
                         </div>
                     </div>
                 </div>
@@ -31,13 +37,15 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
         },
         data() {
           return {
           client : {},
           magnet: "",
           progress: "",
+          isVideo: false,
+          isAudio: false,
+          isImage: false,
           files: []
         }
         },
@@ -51,20 +59,33 @@
               torrent.on('download',function(){
                 that.progress = (torrent.progress).toFixed(3) * 100;
               });
+              var files = torrent.files;
+              for(var i = 0; i < files.length; i++){
 
-            // Torrents can contain many files. Let's use the .mp4 file
-            var files = torrent.files;
-            for(var i = 0; i < files.length; i++){
 
-                var file = files[i];
-              // Display the file by adding it to the DOM.
-              // Supports video, audio, image files, and more!
-              files[i].getBlobURL(function (err, url) {
-                console.log(file);
-                if (err) throw err
-               that.files.push({url: url, name: file.name});
-              });
-            }
+                  var file = files[i];
+                  if(file.name.endsWith('.mp4') || file.name.endsWith('.webm') || file.name.endsWith('.ogg')){
+                    // Display the file by adding it to the DOM. Supports video, audio, image, etc. files
+                    that.isVideo=true;
+                    file.renderTo('video#video-player')
+                  }
+                  else if(file.name.endsWith('.jpeg')||file.name.endsWith('.jpg') || file.name.endsWith('.png')){
+                    that.isImage = true;
+                    file.renderTo('img#image-player');
+                  }
+                  else if(file.name.endsWith('.mp3') || file.name.endsWith('.flac') || file.name.endsWith('.aac')){
+                    // Display the file by adding it to the DOM. Supports video, audio, image, etc. files
+                    that.isAudio=true;
+                    file.renderTo('audio#audio-player')
+                  }
+                // Display the file by adding it to the DOM.
+                // Supports video, audio, image files, and more!
+                file.getBlobURL(function (err, url) {
+                  if (err) throw err
+                 that.files.push({url: url, name: file.name});
+                });
+              }
+
           });
           }
         }
