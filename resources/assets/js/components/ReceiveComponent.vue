@@ -50,7 +50,11 @@
         }
         },
         created(){
+          navigator.registerProtocolHandler("magnet",
+                                  "https://www.instatorrent.stream/?magnet=%s",
+                                  "Magnet handler");
           this.client = new WebTorrent();
+          this.magnet = this.$router.params.magnet
         },
         methods:{
           download: function(){

@@ -44534,7 +44534,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
+    navigator.registerProtocolHandler("magnet", "https://www.instatorrent.stream/?magnet=%s", "Magnet handler");
     this.client = new WebTorrent();
+    this.magnet = this.$router.params.magnet;
   },
 
   methods: {
