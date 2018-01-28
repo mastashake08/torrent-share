@@ -44318,6 +44318,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/js/worker.js');
+    }
     var that = this;
     this.client = new WebTorrent();
     dragDrop('body', function (files) {
