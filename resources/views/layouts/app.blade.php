@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@mastashake08" />
+    <meta name="twitter:creator" content="@mastashake08" />
+    <meta property="og:url" content="{{url('/')}}" />
+    <meta property="og:title" content="{{env('APP_NAME')}}" />
+    <meta property="og:description" content="Share/stream files with the power of WebTorrent! Always free forever!" />
+    <meta property="og:image" content="{{url('/android-icon-192x192.png')}}" />
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">

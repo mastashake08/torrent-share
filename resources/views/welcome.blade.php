@@ -15,6 +15,10 @@
 </script>
 </div>
 <br>
+<div class="jumbotron">
+<p class="text-center">InstaTorrent Stream is a web app that allows sending and receiving files using the WebTorrent protocol.
+  Don't want to download the file? You can stream it right in the browser!</p>
+</div>
 <send-component></send-component>
 <receive-component></receive-component>
 <div class="container">
