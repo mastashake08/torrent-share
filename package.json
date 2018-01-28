@@ -21,6 +21,7 @@
     "dependencies": {
         "drag-drop": "^2.13.2",
         "vue-clipboard2": "0.0.8",
+        "vue-router": "^3.0.1",
         "webtorrent": "^0.98.20"
     }
 }

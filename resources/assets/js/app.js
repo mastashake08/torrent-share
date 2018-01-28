@@ -11,6 +11,9 @@ window.Vue = require('vue');
 window.WebTorrent = require('webtorrent/webtorrent.min')
 window.dragDrop = require('drag-drop')
 import VueClipboard from 'vue-clipboard2'
+import VueRouter from 'vue-router'
+
+Vue.use(VueRouter)
 
 Vue.use(VueClipboard)
 /**

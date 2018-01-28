@@ -16,6 +16,11 @@
                             v-clipboard:success="onCopy"
                             v-clipboard:error="onError">Copy To Clipboard</button>
                             <button v-else class="btn btn-sm" type="button" disabled>Copy To Clipboard</button>
+                            Total Uploaded: {{uploaded}} bytes
+                            <br>
+                            Upload Speed: {{speed}} b/s
+                            <br>
+                            Total Progress: {{progress * 100}}%
                         </div>
                     </div>
                 </div>
@@ -34,6 +39,9 @@
           magnet: "",
           isReady: false,
           copied: false,
+          uploaded: '',
+          progress: '',
+          speed: ''
         }
         },
         created(){
@@ -47,6 +55,11 @@
               that.magnet = torrent.magnetURI;
               that.isReady = true;
             })
+            torrent.on('upload', function (bytes) {
+              that.progress = torrent.progress
+              that.speed = torrent.uploadSpeed
+              that.uploaded = torrent.uploaded
+            })
           })
         },
         methods:{
@@ -55,6 +68,11 @@
             this.client.seed(event.target.files, function (torrent) {
               that.magnet = torrent.magnetURI;
               that.isReady = true;
+              torrent.on('upload', function (bytes) {
+                that.progress = torrent.progress
+                that.speed = torrent.uploadSpeed
+                that.uploaded = torrent.uploaded
+              });
             })
           },
           onCopy: function (e) {

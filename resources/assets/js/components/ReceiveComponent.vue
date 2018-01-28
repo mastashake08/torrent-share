@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-4 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Recieve A File</div>
 
@@ -20,13 +20,24 @@
                               {{file.name}} - <a :download="file.name" :href="file.url" target="_blank">Download Now</a>
                             </li>
                           </ul>
-                          <br>
-                          <div align="center" class="embed-responsive embed-responsive-16by9">
-                          <video v-show="isVideo"id="video-player" autoplay controls class="embed-responsive-item"></video>
-                          </div>
-                          <audio v-show="isAudio"id="audio-player" autoplay controls></audio>
-                          <img class="img-responsive" v-show="isImage" id="image-player"></img>
+
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Stream Preview</div>
+
+                    <div class="panel-body">
+
+                          <div align="center" class="embed-responsive embed-responsive-16by9">
+                          <video v-if="isVideo"id="video-player" autoplay controls class="embed-responsive-item"></video>
+                          <audio v-if="isAudio"id="audio-player" autoplay controls></audio>
+                          <img class="img-responsive" v-if="isImage" id="image-player"></img>
+                          </div>
+
+
                     </div>
                 </div>
             </div>
@@ -50,13 +61,30 @@
         }
         },
         created(){
-          navigator.registerProtocolHandler("magnet",
-                                  "https://www.instatorrent.stream/?magnet=%s",
-                                  "Magnet handler");
+        /*  navigator.registerProtocolHandler("magnet",
+                                  "https://instatorrent.stream/?magnet=%s",
+                                  "Magnet handler"); */
           this.client = new WebTorrent();
-          this.magnet = this.$router.params.magnet
+          console.log(this.$router);
+          this.magnet = this.getQueryParam('magnet')+'&dn='+this.getQueryParam('dn')+'&tr='+this.getQueryParam('tr')
         },
         methods:{
+          getQueryParam :function(name, url) {
+            var result = '';
+              if (!url) url = window.location.href;
+              name = name.replace(/[\[\]]/g, "\\$&");
+              var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                  results = regex.exec(url);
+                  console.log(results);
+              if (!results) return null;
+              if (!results[2]) return '';
+              for(var i = 0; i < results.length; ++i){
+                result += results[i]
+              }
+              console.log(result);
+              return decodeURIComponent(results[2].replace(/\+/g, " "));
+          },
+
           download: function(){
             var that = this;
             this.client.add(this.magnet, function (torrent) {
@@ -71,16 +99,31 @@
                   if(file.name.endsWith('.mp4') || file.name.endsWith('.webm') || file.name.endsWith('.ogg')){
                     // Display the file by adding it to the DOM. Supports video, audio, image, etc. files
                     that.isVideo=true;
-                    file.renderTo('video#video-player')
+                    that.$nextTick(function () {
+                     // DOM is now updated
+                     // `this` is bound to the current instance
+                     file.renderTo('video#video-player')
+                   })
+
                   }
                   else if(file.name.endsWith('.jpeg')||file.name.endsWith('.jpg') || file.name.endsWith('.png')){
                     that.isImage = true;
-                    file.renderTo('img#image-player');
+                    that.$nextTick(function () {
+                     // DOM is now updated
+                     // `this` is bound to the current instance
+                     file.renderTo('img#image-player');
+                   })
+
                   }
                   else if(file.name.endsWith('.mp3') || file.name.endsWith('.flac') || file.name.endsWith('.aac')){
                     // Display the file by adding it to the DOM. Supports video, audio, image, etc. files
                     that.isAudio=true;
-                    file.renderTo('audio#audio-player')
+                    that.$nextTick(function () {
+                     // DOM is now updated
+                     // `this` is bound to the current instance
+                      file.renderTo('audio#audio-player')
+                   })
+
                   }
                 // Display the file by adding it to the DOM.
                 // Supports video, audio, image files, and more!
