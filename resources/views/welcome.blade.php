@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- instatorrent -->
 <ins class="adsbygoogle"
@@ -12,8 +13,10 @@
 
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+</div>
 <send-component></send-component>
 <receive-component></receive-component>
+<div class="container">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- instatorrents2 -->
 <ins class="adsbygoogle"
@@ -24,4 +27,5 @@
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+</div>
 @endsection
