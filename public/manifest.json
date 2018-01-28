@@ -5,6 +5,8 @@
  "background": {
    "scripts": ["/js/app.js","/js/worker.js"]
   },
+  "display": "standalone",
+  "orientation": "landscape",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",
