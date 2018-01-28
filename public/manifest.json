@@ -3,7 +3,7 @@
  "short_name": "InstaTorrent",
  "start_url": "/",
  "background": {
-   "scripts": ["js/app.js","js/worker.js"]
+   "scripts": ["/js/app.js","/js/worker.js"]
   },
  "icons": [
   {
