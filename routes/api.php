@@ -16,3 +16,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/add-torrent',function(Request $request){
+  $magnet = \App\Magnet::create([
+    'magnet' => $request->magnet
+  ]);
+  return response()->json($magnet);
+});

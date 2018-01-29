@@ -46945,6 +46945,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -46956,7 +46964,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       copied: false,
       uploaded: '',
       progress: '',
-      speed: ''
+      speed: '',
+      url: ""
     };
   },
   created: function created() {
@@ -46968,6 +46977,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     dragDrop('body', function (files) {
       that.client.seed(files, function (torrent) {
         that.magnet = torrent.magnetURI;
+        axios.post('/api/add-torrent', { magnet: that.magnet }).then(function (data) {
+          that.url = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
+        });
         that.isReady = true;
       });
       torrent.on('upload', function (bytes) {
@@ -46983,6 +46995,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var that = this;
       this.client.seed(event.target.files, function (torrent) {
         that.magnet = torrent.magnetURI;
+        axios.post('/api/add-torrent', { magnet: that.magnet }).then(function (data) {
+          that.url = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
+        });
         that.isReady = true;
         torrent.on('upload', function (bytes) {
           that.progress = torrent.progress;
@@ -46992,7 +47007,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     onCopy: function onCopy(e) {
-      alert('Magnet Link Copied To Clipboard');
+      alert('Link Copied To Clipboard');
     },
     onError: function onError(e) {
       alert('Failed to copy texts');
@@ -47019,7 +47034,10 @@ var render = function() {
               _vm._v(
                 "\n                      Drag and drop or select the file(s) you want to share.\n                      "
               ),
-              _c("input", { attrs: { type: "file" }, on: { change: _vm.send } })
+              _c("input", {
+                attrs: { type: "file", multiple: "" },
+                on: { change: _vm.send }
+              })
             ]),
             _vm._v(" "),
             _vm.isReady
@@ -47032,8 +47050,8 @@ var render = function() {
                             {
                               name: "clipboard",
                               rawName: "v-clipboard:copy",
-                              value: _vm.magnet,
-                              expression: "magnet",
+                              value: _vm.url,
+                              expression: "url",
                               arg: "copy"
                             },
                             {
@@ -47064,6 +47082,26 @@ var render = function() {
                         },
                         [_vm._v("Copy To Clipboard")]
                       ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "twitter-share-button",
+                      attrs: {
+                        href:
+                          "https://twitter.com/intent/tweet?text=Download%20my%20torrent",
+                        "data-size": "large",
+                        "data-url": _vm.url
+                      }
+                    },
+                    [_vm._v("\n                        Tweet")]
+                  ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v("Share your link " + _vm._s(_vm.url))]),
+                  _vm._v(" "),
+                  _c("br"),
                   _vm._v(
                     "\n                        Total Uploaded: " +
                       _vm._s(_vm.uploaded) +
@@ -47213,13 +47251,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       files: []
     };
   },
+
+  props: ['magnetLink'],
   created: function created() {
+    if (this.magnetLink != '') {
+      this.magnet = this.magnetLink;
+    }
     /*  navigator.registerProtocolHandler("magnet",
                               "https://instatorrent.stream/?magnet=%s",
                               "Magnet handler"); */
     this.client = new WebTorrent();
-    console.log(this.$router);
-    this.magnet = this.getQueryParam('magnet') + '&dn=' + this.getQueryParam('dn') + '&tr=' + this.getQueryParam('tr');
   },
 
   methods: {

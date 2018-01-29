@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+
+    if($request->has('magnet_id')){
+      return view('welcome-download')->with([
+        'magnet' => \App\Magnet::findOrFail($request->magnet_id)
+      ]);
+    }
     return view('welcome');
 });
 

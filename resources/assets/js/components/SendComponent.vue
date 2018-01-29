@@ -8,14 +8,22 @@
                     <div class="panel-body">
                         <div class="form-group">
                           Drag and drop or select the file(s) you want to share.
-                          <input type="file" v-on:change="send">
+                          <input type="file" v-on:change="send" multiple>
                         </div>
                         <div  v-if="isReady">
                           <button v-if="copied == false" class="btn btn-sm btn-primary" type="button"
-                            v-clipboard:copy="magnet"
+                            v-clipboard:copy="url"
                             v-clipboard:success="onCopy"
                             v-clipboard:error="onError">Copy To Clipboard</button>
                             <button v-else class="btn btn-sm" type="button" disabled>Copy To Clipboard</button>
+                              <a class="twitter-share-button"
+                              href="https://twitter.com/intent/tweet?text=Download%20my%20torrent"
+                              data-size="large"
+                              :data-url="url">
+                            Tweet</a>
+                            <br>
+                            <h2>Share your link {{url}}</h2>
+                            <br>
                             Total Uploaded: {{uploaded}} bytes
                             <br>
                             Upload Speed: {{speed}} b/s
@@ -41,7 +49,8 @@
           copied: false,
           uploaded: '',
           progress: '',
-          speed: ''
+          speed: '',
+          url: ""
         }
         },
         created(){
@@ -53,6 +62,9 @@
           dragDrop('body', function (files) {
             that.client.seed(files, function (torrent) {
               that.magnet = torrent.magnetURI;
+              axios.post('/api/add-torrent',{magnet:that.magnet}).then(function(data){
+                that.url = 'https://instatorrent.stream/?magnet_id='+data.data.id
+              });
               that.isReady = true;
             })
             torrent.on('upload', function (bytes) {
@@ -67,6 +79,9 @@
             var that = this;
             this.client.seed(event.target.files, function (torrent) {
               that.magnet = torrent.magnetURI;
+              axios.post('/api/add-torrent',{magnet:that.magnet}).then(function(data){
+                that.url = 'https://instatorrent.stream/?magnet_id='+data.data.id
+              });
               that.isReady = true;
               torrent.on('upload', function (bytes) {
                 that.progress = torrent.progress
@@ -76,7 +91,7 @@
             })
           },
           onCopy: function (e) {
-            alert('Magnet Link Copied To Clipboard');
+            alert('Link Copied To Clipboard');
           },
           onError: function (e) {
             alert('Failed to copy texts')

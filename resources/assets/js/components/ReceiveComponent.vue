@@ -60,13 +60,16 @@
           files: []
         }
         },
+        props: ['magnetLink'],
         created(){
+          if(this.magnetLink != ''){
+            this.magnet = this.magnetLink;
+          }
         /*  navigator.registerProtocolHandler("magnet",
                                   "https://instatorrent.stream/?magnet=%s",
                                   "Magnet handler"); */
           this.client = new WebTorrent();
-          console.log(this.$router);
-          this.magnet = this.getQueryParam('magnet')+'&dn='+this.getQueryParam('dn')+'&tr='+this.getQueryParam('tr')
+
         },
         methods:{
           getQueryParam :function(name, url) {
