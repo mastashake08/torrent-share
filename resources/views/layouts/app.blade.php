@@ -43,7 +43,21 @@
   "author": "Jyrone Parker",
   "contentRating": "Everyone",
   "image": "/android-icon-192x192.png",
-  "name": "InstaTorrent"
+  "name": "InstaTorrent",
+  "copyrightYear": "2018",
+  "description": "InstaTorrent Stream is a web file sharing app powered by the bittorrent protocol.",
+  "url": "{{url('/')}}",
+  "version": "1.0",
+  "producer": {
+      "@type": "Person",
+      "name": "Jyrone Parker",
+      "email": "inquiries@jyroneparker.com",
+      "gender": "male",
+      "jobTitle": "CEO",
+      "telephone": "859-402-4863",
+      "image": "https://en.gravatar.com/userimage/70717632/53adbdecac04d4ffbe3449993c901a73.jpg",
+      "url": "https://jyroneparker.com"
+    },
 }
 </script>
 </head>
