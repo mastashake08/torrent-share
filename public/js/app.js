@@ -46965,7 +46965,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       uploaded: '',
       progress: '',
       speed: '',
-      url: ""
+      urlLink: ""
     };
   },
   created: function created() {
@@ -46978,7 +46978,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       that.client.seed(files, function (torrent) {
         that.magnet = torrent.magnetURI;
         axios.post('/api/add-torrent', { magnet: that.magnet }).then(function (data) {
-          that.url = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
+          that.urlLink = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
         });
         that.isReady = true;
       });
@@ -46996,7 +46996,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.client.seed(event.target.files, function (torrent) {
         that.magnet = torrent.magnetURI;
         axios.post('/api/add-torrent', { magnet: that.magnet }).then(function (data) {
-          that.url = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
+          that.urlLink = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
         });
         that.isReady = true;
         torrent.on('upload', function (bytes) {
@@ -47083,18 +47083,8 @@ var render = function() {
                         [_vm._v("Copy To Clipboard")]
                       ),
                   _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "twitter-share-button",
-                      attrs: {
-                        href:
-                          "https://twitter.com/intent/tweet?text=Download%20my%20torrent",
-                        "data-size": "large",
-                        "data-url": _vm.url
-                      }
-                    },
-                    [_vm._v("\n                        Tweet")]
+                  _vm._v(
+                    '"urlLink"\n                          data-size="large"\n                          :data-url="url">\n                        Tweet'
                   ),
                   _vm._v(" "),
                   _c("br"),

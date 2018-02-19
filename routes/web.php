@@ -24,3 +24,12 @@ Route::get('/', function (Request $request) {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/how-it-works',function(){
+  return view('how-it-works');
+});
+Route::get('/privacy',function(){
+  return view('privacy');
+});
+Route::get('/pricing',function(){
+  return view('pricing');
+});

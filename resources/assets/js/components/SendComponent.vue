@@ -17,7 +17,7 @@
                             v-clipboard:error="onError">Copy To Clipboard</button>
                             <button v-else class="btn btn-sm" type="button" disabled>Copy To Clipboard</button>
                               <a class="twitter-share-button"
-                              href="https://twitter.com/intent/tweet?text=Download%20my%20torrent"
+                              :href='https://twitter.com/intent/tweet?text=Download%20my%20torrent?url='+"urlLink"
                               data-size="large"
                               :data-url="url">
                             Tweet</a>
@@ -50,7 +50,7 @@
           uploaded: '',
           progress: '',
           speed: '',
-          url: ""
+          urlLink: ""
         }
         },
         created(){
@@ -63,7 +63,7 @@
             that.client.seed(files, function (torrent) {
               that.magnet = torrent.magnetURI;
               axios.post('/api/add-torrent',{magnet:that.magnet}).then(function(data){
-                that.url = 'https://instatorrent.stream/?magnet_id='+data.data.id
+                that.urlLink = 'https://instatorrent.stream/?magnet_id='+data.data.id
               });
               that.isReady = true;
             })
@@ -80,7 +80,7 @@
             this.client.seed(event.target.files, function (torrent) {
               that.magnet = torrent.magnetURI;
               axios.post('/api/add-torrent',{magnet:that.magnet}).then(function(data){
-                that.url = 'https://instatorrent.stream/?magnet_id='+data.data.id
+                that.urlLink = 'https://instatorrent.stream/?magnet_id='+data.data.id
               });
               that.isReady = true;
               torrent.on('upload', function (bytes) {

@@ -60,13 +60,15 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                        <li><a href="{{url('/how-it-works')}}">How It Works</a></li>
+                        <li><a href="{{url('/pricing')}}">Pricing</a></li>
+                        <li><a href="{{url('/privacy')}}">Privacy Policy</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                    <!--    @guest
+                        @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
@@ -89,7 +91,7 @@
                                     </li>
                                 </ul>
                             </li>
-                        @endguest -->
+                        @endguest
                     </ul>
                 </div>
             </div>
