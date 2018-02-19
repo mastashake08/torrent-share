@@ -47259,13 +47259,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   props: ['magnetLink'],
   created: function created() {
+    var trackers = ['wss://tracker.btorrent.xyz', 'wss://tracker.openwebtorrent.com', 'wss://tracker.fastcast.nz'];
+
+    var rtcConfig = {
+      'iceServers': [{
+        'urls': 'stun:stun.l.google.com:19305'
+      }]
+    };
+
+    var trackerOpts = {
+      announce: trackers,
+      rtcConfig: rtcConfig
+    };
     if (this.magnetLink != '') {
       this.magnet = this.magnetLink;
     }
     /*  navigator.registerProtocolHandler("magnet",
                               "https://instatorrent.stream/?magnet=%s",
                               "Magnet handler"); */
-    this.client = new WebTorrent();
+    this.client = new WebTorrent({
+      tracker: trackerOpts
+    });
   },
 
   methods: {

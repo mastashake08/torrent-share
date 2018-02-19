@@ -65,13 +65,29 @@
         },
         props: ['magnetLink'],
         created(){
+          const trackers = ['wss://tracker.btorrent.xyz', 'wss://tracker.openwebtorrent.com', 'wss://tracker.fastcast.nz']
+
+          const rtcConfig = {
+            'iceServers': [
+              {
+                'urls': 'stun:stun.l.google.com:19305'
+              }
+            ]
+          }
+
+          const trackerOpts = {
+            announce: trackers,
+            rtcConfig: rtcConfig
+          }
           if(this.magnetLink != ''){
             this.magnet = this.magnetLink;
           }
         /*  navigator.registerProtocolHandler("magnet",
                                   "https://instatorrent.stream/?magnet=%s",
                                   "Magnet handler"); */
-          this.client = new WebTorrent();
+          this.client = new WebTorrent({
+                  tracker: trackerOpts
+                });
 
         },
         methods:{
