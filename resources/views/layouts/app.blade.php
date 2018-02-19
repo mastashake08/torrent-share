@@ -36,6 +36,16 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CreativeWork",
+  "author": "Jyrone Parker",
+  "contentRating": "Everyone",
+  "image": "/android-icon-192x192.png",
+  "name": "InstaTorrent"
+}
+</script>
 </head>
 <body>
     <div id="app">
