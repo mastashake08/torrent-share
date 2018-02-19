@@ -56,7 +56,9 @@
       "jobTitle": "CEO",
       "telephone": "859-402-4863",
       "image": "https://en.gravatar.com/userimage/70717632/53adbdecac04d4ffbe3449993c901a73.jpg",
-      "url": "https://jyroneparker.com"
+      "url": "https://jyroneparker.com",
+      "sameAs": "https://twitter.com/mastashake08",
+      "sameAs": "https://youtube.com/c/jyroneparker"
     }
 }
 </script>

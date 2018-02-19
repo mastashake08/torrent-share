@@ -19,7 +19,9 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "dotenv": "^5.0.0",
         "drag-drop": "^2.13.2",
+        "twit": "^2.2.9",
         "vue-clipboard2": "0.0.8",
         "vue-router": "^3.0.1",
         "webtorrent": "^0.98.20"
