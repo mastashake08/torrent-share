@@ -35,6 +35,8 @@
                           <video v-if="isVideo"id="video-player" autoplay controls class="embed-responsive-item"></video>
                           <audio v-if="isAudio"id="audio-player" autoplay controls></audio>
                           <img class="img-responsive" v-if="isImage" id="image-player"></img>
+                          <iframe v-if="isFile" id="file-render">
+                          </iframe>
                           </div>
 
 
@@ -57,6 +59,7 @@
           isVideo: false,
           isAudio: false,
           isImage: false,
+          isFile:false,
           files: []
         }
         },
@@ -127,6 +130,14 @@
                       file.renderTo('audio#audio-player')
                    })
 
+                  }
+                  else{
+                    that.isFile=true;
+                    that.$nextTick(function () {
+                     // DOM is now updated
+                     // `this` is bound to the current instance
+                    file.renderTo('#file-render')
+                    })
                   }
                 // Display the file by adding it to the DOM.
                 // Supports video, audio, image files, and more!

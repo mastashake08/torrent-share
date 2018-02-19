@@ -47237,6 +47237,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
@@ -47248,6 +47250,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       isVideo: false,
       isAudio: false,
       isImage: false,
+      isFile: false,
       files: []
     };
   },
@@ -47312,6 +47315,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               // DOM is now updated
               // `this` is bound to the current instance
               file.renderTo('audio#audio-player');
+            });
+          } else {
+            that.isFile = true;
+            that.$nextTick(function () {
+              // DOM is now updated
+              // `this` is bound to the current instance
+              file.renderTo('#file-render');
             });
           }
           // Display the file by adding it to the DOM.
@@ -47445,6 +47455,10 @@ var render = function() {
                       staticClass: "img-responsive",
                       attrs: { id: "image-player" }
                     })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isFile
+                  ? _c("iframe", { attrs: { id: "file-render" } })
                   : _vm._e()
               ]
             )
