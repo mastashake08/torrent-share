@@ -99,7 +99,7 @@
               that.magnet = torrent.magnetURI;
               axios.post('/api/add-torrent',{magnet:that.magnet}).then(function(data){
                 that.urlLink = 'https://instatorrent.stream/?magnet_id='+data.data.id
-                that.twitterLink = "https://twitter.com/intent/tweet?text=Download%20my%20torrent&via=mastashake08&url="+that.urlLink;
+                that.twitterLink = "https://twitter.com/intent/tweet?text=Download%20my%20torrent&via=instatorrent&url="+that.urlLink;
               });
               that.isReady = true;
               torrent.on('upload', function (bytes) {
