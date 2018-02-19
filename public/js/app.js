@@ -46970,11 +46970,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   created: function created() {
+    var trackers = ['wss://tracker.btorrent.xyz', 'wss://tracker.openwebtorrent.com', 'wss://tracker.fastcast.nz'];
+
+    var rtcConfig = {
+      'iceServers': [{
+        'urls': 'stun:stun.l.google.com:19305'
+      }]
+    };
+
+    var trackerOpts = {
+      announce: trackers,
+      rtcConfig: rtcConfig
+    };
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/js/worker.js');
     }
     var that = this;
-    this.client = new WebTorrent();
+    this.client = new WebTorrent({
+      tracker: trackerOpts
+    });
     dragDrop('body', function (files) {
       that.client.seed(files, function (torrent) {
         that.magnet = torrent.magnetURI;
