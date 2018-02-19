@@ -46965,7 +46965,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       uploaded: '',
       progress: '',
       speed: '',
-      urlLink: ""
+      urlLink: "",
+      twitterLink: ""
     };
   },
   created: function created() {
@@ -46979,6 +46980,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         that.magnet = torrent.magnetURI;
         axios.post('/api/add-torrent', { magnet: that.magnet }).then(function (data) {
           that.urlLink = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
+          that.twitterLink = "https://twitter.com/intent/tweet?text=Download%20my%20torrent&via=mastashake08&url=" + that.urlLink;
         });
         that.isReady = true;
       });
@@ -46997,6 +46999,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         that.magnet = torrent.magnetURI;
         axios.post('/api/add-torrent', { magnet: that.magnet }).then(function (data) {
           that.urlLink = 'https://instatorrent.stream/?magnet_id=' + data.data.id;
+          that.twitterLink = "https://twitter.com/intent/tweet?text=Download%20my%20torrent&via=mastashake08&url=" + that.urlLink;
         });
         that.isReady = true;
         torrent.on('upload', function (bytes) {
@@ -47083,13 +47086,22 @@ var render = function() {
                         [_vm._v("Copy To Clipboard")]
                       ),
                   _vm._v(" "),
-                  _vm._v(
-                    '"urlLink"\n                          data-size="large"\n                          :data-url="url">\n                        Tweet'
+                  _c(
+                    "a",
+                    {
+                      staticClass: "twitter-share-button",
+                      attrs: {
+                        href: _vm.twitterLink,
+                        "data-size": "large",
+                        "data-url": _vm.url
+                      }
+                    },
+                    [_vm._v("\n                        Tweet")]
                   ),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _c("h2", [_vm._v("Share your link " + _vm._s(_vm.url))]),
+                  _c("h2", [_vm._v("Share your link " + _vm._s(_vm.urlLink))]),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(
