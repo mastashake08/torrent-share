@@ -36,31 +36,40 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53029737-9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-53029737-9');
+    </script>
     <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "CreativeWork",
-  "author": "Jyrone Parker",
-  "contentRating": "Everyone",
-  "image": "/android-icon-192x192.png",
-  "name": "InstaTorrent",
-  "copyrightYear": "2018",
-  "description": "InstaTorrent Stream is a web file sharing app powered by the bittorrent protocol.",
-  "url": "{{url('/')}}",
-  "version": "1.0",
-  "producer": {
-      "@type": "Person",
-      "name": "Jyrone Parker",
-      "email": "inquiries@jyroneparker.com",
-      "gender": "male",
-      "jobTitle": "CEO",
-      "telephone": "859-402-4863",
-      "image": "https://en.gravatar.com/userimage/70717632/53adbdecac04d4ffbe3449993c901a73.jpg",
-      "url": "https://jyroneparker.com",
-      "sameAs": "https://twitter.com/mastashake08",
-      "sameAs": "https://youtube.com/c/jyroneparker"
-    }
-}
+      {
+        "@context": "http://schema.org",
+        "@type": "CreativeWork",
+        "author": "Jyrone Parker",
+        "contentRating": "Everyone",
+        "image": "/android-icon-192x192.png",
+        "name": "InstaTorrent",
+        "copyrightYear": "2018",
+        "description": "InstaTorrent Stream is a web file sharing app powered by the bittorrent protocol.",
+        "url": "{{url('/')}}",
+        "version": "1.0",
+        "producer": {
+            "@type": "Person",
+            "name": "Jyrone Parker",
+            "email": "inquiries@jyroneparker.com",
+            "gender": "male",
+            "jobTitle": "CEO",
+            "telephone": "859-402-4863",
+            "image": "https://en.gravatar.com/userimage/70717632/53adbdecac04d4ffbe3449993c901a73.jpg",
+            "url": "https://jyroneparker.com",
+            "sameAs": "https://twitter.com/mastashake08",
+            "sameAs": "https://youtube.com/c/jyroneparker"
+          }
+      }
 </script>
 </head>
 <body>
