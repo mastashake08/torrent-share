@@ -1,9 +1,8 @@
-var CACHE_NAME = 'pos-cache-v1';
+var CACHE_NAME = 'torrent-share-v1';
 var urlsToCache = [
   '/css/app.css',
   '/js/app.js',
   '/',
-  '/business'
 ];
 
 self.addEventListener('install', function(event) {
